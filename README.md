@@ -25,8 +25,7 @@ Em um monólito modular saudável, o domínio continua sendo a fonte da verdade 
 
 Outro aspecto importante é a **evolução futura**. Modular monoliths são excelentes porque permitem uma transição natural para microsserviços quando — e se — isso fizer sentido. Um módulo data-driven que começa a sofrer com volume ou latência pode ser extraído quase intacto para um serviço Go, por exemplo. Um módulo DDD que exige maior isolamento ou times dedicados pode virar um serviço Ruby. Se as fronteiras foram bem desenhadas desde o início, essa extração é evolutiva, não traumática.
 
+<img height="77" align="right" src="https://github.com/user-attachments/assets/3d3130fa-f4c5-4de8-b952-6c1433695696" />
+
 Então, no contexto da sua pergunta, modular monoliths são frequentemente **a melhor resposta pragmática**: desacoplar DDD e data-driven conceitualmente, mantê-los separados estruturalmente, mas implantados juntos enquanto isso fizer sentido. Eles preservam clareza, reduzem risco e mantêm opções abertas. A arquitetura continua correta; apenas o custo operacional é adiado de forma inteligente.
-
-<img width="450" height="450" alt="cube-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--square-smooth-object-abstract-shapes-pack-design-development-illustrations-4002449" src="https://github.com/user-attachments/assets/3d3130fa-f4c5-4de8-b952-6c1433695696" />
-
 
