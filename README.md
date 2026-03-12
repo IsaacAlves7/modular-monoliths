@@ -20,6 +20,8 @@ Do ponto de vista prático, um monolítico modular costuma ser a escolha ideal q
 > [!Note]
 > Exploraremos os três principais estilos arquitetônicos: Monólito, Microserviços e Monólitos Modulares. Cada um oferece abordagens distintas para estruturar softwares, com benefícios e desafios únicos. Examinaremos os pontos fortes e fracos de cada abordagem, desde a facilidade de um monólito até a resiliência dos microserviços e o design equilibrado de um monólito modular. Vamos analisar cenários em que mudar de uma arquitetura para outra faz sentido, nos equipando com insights práticos para navegar por essas decisões críticas.
 
+![66d12ddc-2abe-4a98-82d5-ee177e80487c_1470x1600](https://github.com/user-attachments/assets/701c4ceb-de64-40d3-acaa-b9ed3da50947)
+
 Em essência, um monolítico modular é uma arquitetura que aposta na disciplina interna em vez da fragmentação externa. Ele reconhece que o maior problema dos sistemas grandes não é o fato de rodarem em um único processo, mas o fato de não terem limites claros. Quando esses limites existem, o monólito deixa de ser um problema e passa a ser uma base sólida para crescimento.
 
 Modular monoliths mudam o *formato de implantação*, mas *não mudam o princípio arquitetural*. Eles não anulam a recomendação de desacoplar DDD e data-driven; eles apenas oferecem um *meio mais controlado* de fazer isso quando microsserviços seriam caros, prematuros ou desnecessários.
@@ -40,7 +42,7 @@ Outro aspecto importante é a **evolução futura**. Modular monoliths são exce
 
 Então, no contexto da sua pergunta, modular monoliths são frequentemente **a melhor resposta pragmática**: desacoplar DDD e data-driven conceitualmente, mantê-los separados estruturalmente, mas implantados juntos enquanto isso fizer sentido. Eles preservam clareza, reduzem risco e mantêm opções abertas. A arquitetura continua correta; apenas o custo operacional é adiado de forma inteligente.
 
-![66d12ddc-2abe-4a98-82d5-ee177e80487c_1470x1600](https://github.com/user-attachments/assets/701c4ceb-de64-40d3-acaa-b9ed3da50947)
+Estrutura do projeto de monolítico modular:
 
 ```
 src/
