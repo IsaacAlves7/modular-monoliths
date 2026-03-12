@@ -3,11 +3,11 @@
 
 Um **monolítico modular** é uma arquitetura onde a aplicação é implantada como **um único sistema**, um único processo, um único deploy, mas *internamente é organizada em módulos fortemente isolados*, cada um com responsabilidades claras, contratos bem definidos e regras rígidas de dependência. Ele não é um “monólito bagunçado” melhorado, nem um microsserviço disfarçado; é uma tentativa deliberada de obter os benefícios conceituais dos microsserviços sem pagar, de início, o custo operacional deles.
 
-A ideia central é que o acoplamento **não acontece no nível do deploy**, mas no nível do código e do domínio. Cada módulo representa um bounded context ou uma capacidade específica do sistema e controla completamente seu próprio modelo, regras e dados. Outros módulos não acessam suas estruturas internas diretamente; eles interagem por interfaces públicas, eventos ou APIs internas bem definidas. Mesmo estando no mesmo repositório e no mesmo binário, os módulos se comportam como se fossem sistemas separados do ponto de vista conceitual.
+A ideia central é que o acoplamento *não acontece no nível do deploy*, mas no nível do código e do domínio. Cada módulo representa um bounded context ou uma capacidade específica do sistema e controla completamente seu próprio modelo, regras e dados. Outros módulos não acessam suas estruturas internas diretamente; eles interagem por interfaces públicas, eventos ou APIs internas bem definidas. Mesmo estando no mesmo repositório e no mesmo binário, os módulos se comportam como se fossem sistemas separados do ponto de vista conceitual.
 
 Isso muda profundamente os pontos de atenção em relação a um monólito tradicional. Em um monolito clássico, tudo pode chamar tudo, tabelas são compartilhadas, regras vazam entre camadas e o sistema cresce como um emaranhado difícil de entender e de evoluir. No monolítico modular, essas práticas são explicitamente proibidas ou fortemente desencorajadas. Dependências têm direção clara, ciclos são evitados, e o domínio não é contaminado por detalhes técnicos de outros módulos.
 
-Outro aspecto importante é que um monolítico modular favorece **clareza semântica e evolução segura**. Como cada módulo tem fronteiras bem definidas, é possível mudar regras de negócio, pipelines de dados ou integrações sem quebrar o sistema inteiro. Testes também se tornam mais significativos, porque você consegue testar módulos de forma isolada, respeitando seus contratos, mesmo estando no mesmo processo.
+Outro aspecto importante é que um monolítico modular favorece *clareza semântica e evolução segura*. Como cada módulo tem fronteiras bem definidas, é possível mudar regras de negócio, pipelines de dados ou integrações sem quebrar o sistema inteiro. Testes também se tornam mais significativos, porque você consegue testar módulos de forma isolada, respeitando seus contratos, mesmo estando no mesmo processo.
 
 No cenário em constante evolução do desenvolvimento de software, a escolha da arquitetura pode fazer ou fracassar um projeto.
 
@@ -24,11 +24,11 @@ Em essência, um monolítico modular é uma arquitetura que aposta na disciplina
 
 Modular monoliths mudam o *formato de implantação*, mas *não mudam o princípio arquitetural*. Eles não anulam a recomendação de desacoplar DDD e data-driven; eles apenas oferecem um *meio mais controlado* de fazer isso quando microsserviços seriam caros, prematuros ou desnecessários.
 
-Em um monólito modular bem feito, você continua tendo **fronteiras rígidas**, só que internas. Os módulos não se conhecem por classes ou tabelas compartilhadas, mas por contratos explícitos, normalmente eventos internos, interfaces bem definidas ou APIs de aplicação. Isso permite separar um módulo claramente orientado a domínio — com agregados, invariantes e regras — de um módulo claramente orientado a dados — com ingestão, transformação, enriquecimento e projeções — mesmo estando no mesmo processo e no mesmo deploy.
+Em um monólito modular bem feito, você continua tendo *fronteiras rígidas*, só que internas. Os módulos não se conhecem por classes ou tabelas compartilhadas, mas por contratos explícitos, normalmente eventos internos, interfaces bem definidas ou APIs de aplicação. Isso permite separar um módulo claramente orientado a domínio — com agregados, invariantes e regras — de um módulo claramente orientado a dados — com ingestão, transformação, enriquecimento e projeções — mesmo estando no mesmo processo e no mesmo deploy.
 
 O grande ganho aqui é **controle semântico com baixo custo operacional**. Você evita a complexidade de rede, observabilidade distribuída, versionamento de APIs externas e orquestração pesada, mas ainda preserva o isolamento conceitual. Para equipes pequenas ou sistemas em crescimento, isso é muitas vezes a melhor escolha: você mantém a disciplina arquitetural do desacoplamento sem pagar o preço total dos microsserviços.
 
-Mas o ponto crítico é que um monólito modular **só funciona se as fronteiras forem realmente respeitadas**. Se módulos DDD começam a acessar diretamente estruturas internas do módulo data-driven, ou se pipelines começam a executar regras de negócio “porque está tudo no mesmo código”, o sistema degrada rapidamente para um monólito acoplado clássico. O erro mais comum é confundir “mesmo repositório” com “mesma responsabilidade”.
+Mas o ponto crítico é que um monólito modular só funciona se as fronteiras forem realmente respeitadas. Se módulos DDD começam a acessar diretamente estruturas internas do módulo data-driven, ou se pipelines começam a executar regras de negócio “porque está tudo no mesmo código”, o sistema degrada rapidamente para um monólito acoplado clássico. O erro mais comum é confundir “mesmo repositório” com “mesma responsabilidade”.
 
 <img height="77" align="right" src="https://github.com/user-attachments/assets/3d3130fa-f4c5-4de8-b952-6c1433695696" />
 
@@ -42,3 +42,45 @@ Então, no contexto da sua pergunta, modular monoliths são frequentemente **a m
 
 ![66d12ddc-2abe-4a98-82d5-ee177e80487c_1470x1600](https://github.com/user-attachments/assets/701c4ceb-de64-40d3-acaa-b9ed3da50947)
 
+```
+src/
+├── server.ts                  ← Entry point + graceful shutdown
+├── app.ts                     ← Express app (monta os módulos)
+├── config/index.ts            ← Zod env validation
+├── prisma/
+│   ├── schema.prisma          ← Users, Products, Orders, RefreshTokens
+│   ├── client.ts              ← Singleton do PrismaClient
+│   └── seed.ts                ← Dados iniciais
+├── gateway/index.ts           ← API Gateway completo
+├── shared/
+│   ├── errors/                ← AppError, NotFoundError, etc.
+│   ├── middleware/            ← Auth JWT, Zod validation, errorHandler
+│   ├── types/                 ← Pagination, ApiResponse, JwtPayload
+│   └── utils/logger.ts        ← Winston logger
+└── modules/
+    ├── users/                 ← Register, Login, Refresh Token, CRUD
+    ├── products/              ← CRUD + ajuste de estoque
+    └── orders/                ← Create, status machine, histórico
+```
+
+⚡ API Gateway: O gateway em `src/gateway/index.ts` é o ponto de entrada único e fornece:
+
+- Correlation ID — cada request ganha um X-Correlation-ID para rastrear de ponta a ponta. 
+
+- Rate limiting por módulo — /api/users tem limite mais restrito (anti-brute-force) que /api/products. 
+
+- Auth centralizada — rotas marcadas como requireAuth: true são validadas no gateway antes de chegar no módulo. Métricas em memória — GET `/gateway/metrics` retorna total de requests, erros, taxa de erro e tempo médio por rota. 
+
+- Registry de rotas — `GET /gateway/routes` lista todos os módulos registrados.
+
+Running up:
+
+```
+cp .env.example .env
+docker-compose up -d        # sobe o PostgreSQL
+
+npm install
+npm run db:migrate          # cria as tabelas
+npm run db:seed             # popula dados iniciais
+npm run dev                 # inicia em http://localhost:8080
+```
