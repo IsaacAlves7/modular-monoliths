@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: modular-monolith-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: monolith_db
+      POSTGRES_USER: monolith_user
+      POSTGRES_PASSWORD: monolith_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U monolith_user -d monolith_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: modular-monolith-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://monolith_user:monolith_pass@postgres:5432/monolith_db
+      GATEWAY_PORT: 8080
+      JWT_SECRET: change-this-super-secret-jwt-key-in-production-32chars
+      REFRESH_SECRET: change-this-super-secret-refresh-key-in-production!!
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
