@@ -36,7 +36,7 @@ Mas o ponto crítico é que um monólito modular só funciona se as fronteiras f
 
 Em um monólito modular saudável, o domínio continua sendo a fonte da verdade semântica. Ele publica eventos ou estados bem definidos. O módulo data-driven consome esses eventos, constrói visões, métricas, agregações e pipelines, e nunca devolve decisões de negócio de forma implícita. Quando existe feedback, ele ocorre por comandos explícitos ou sugestões, não por efeitos colaterais silenciosos.
 
-Outro aspecto importante é a **evolução futura**. Modular monoliths são excelentes porque permitem uma transição natural para microsserviços quando — e se — isso fizer sentido. Um módulo data-driven que começa a sofrer com volume ou latência pode ser extraído quase intacto para um serviço Go, por exemplo. Um módulo DDD que exige maior isolamento ou times dedicados pode virar um serviço Ruby. Se as fronteiras foram bem desenhadas desde o início, essa extração é evolutiva, não traumática.
+Outro aspecto importante é a **evolução futura**. Modular monoliths são excelentes porque permitem uma transição natural para microsserviços quando e se isso fizer sentido. Um módulo data-driven que começa a sofrer com volume ou latência pode ser extraído quase intacto para um serviço Go, por exemplo. Um módulo DDD que exige maior isolamento ou times dedicados pode virar um serviço Ruby. Se as fronteiras foram bem desenhadas desde o início, essa extração é evolutiva, não traumática.
 
 <img width="2934" height="1554" alt="modular_monolith" src="https://github.com/user-attachments/assets/7f422bdd-b0cc-4543-97ae-66374033a01f" />
 
