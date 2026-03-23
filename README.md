@@ -1,3 +1,7 @@
+<img width="1200" height="375" alt="1_CpCVN-lHtFKTuxF5dqEEzg" src="https://github.com/user-attachments/assets/fec24aaa-ca8d-42fd-ba24-1f7c6c1a3bea" />
+
+> Versículo chave: "Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos." - Provérbios 16:3
+
 # Modular monoliths
 <img height="77" align="right" src="https://github.com/user-attachments/assets/73e73893-10e9-4d80-b818-f16309eb1e14" />
 
