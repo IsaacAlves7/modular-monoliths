@@ -69,15 +69,15 @@ src/
     └── orders/                ← Create, status machine, histórico
 ```
 
-⚡ API Gateway: O gateway em `src/gateway/index.ts` é o ponto de entrada único e fornece:
+⚡ **API Gateway**: O gateway em `src/gateway/index.ts` é o ponto de entrada único e fornece:
 
-- Correlation ID — cada request ganha um X-Correlation-ID para rastrear de ponta a ponta. 
+- **Correlation ID** — cada request ganha um X-Correlation-ID para rastrear de ponta a ponta. 
 
-- Rate limiting por módulo — /api/users tem limite mais restrito (anti-brute-force) que /api/products. 
+- **Rate limiting** por módulo — `/api/users` tem limite mais restrito (anti-brute-force) que `/api/products`. 
 
-- Auth centralizada — rotas marcadas como requireAuth: true são validadas no gateway antes de chegar no módulo. Métricas em memória — GET `/gateway/metrics` retorna total de requests, erros, taxa de erro e tempo médio por rota. 
+- **Auth centralizada** — rotas marcadas como requireAuth: true são validadas no gateway antes de chegar no módulo. Métricas em memória — GET `/gateway/metrics` retorna total de requests, erros, taxa de erro e tempo médio por rota. 
 
-- Registry de rotas — `GET /gateway/routes` lista todos os módulos registrados.
+- **Registry de rotas** — `GET /gateway/routes` lista todos os módulos registrados.
 
 Running up:
 
