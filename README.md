@@ -2,7 +2,7 @@
 
 > Versículo chave: "Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos." - Provérbios 16:3
 
-# Modular monoliths
+# 📦🏢 Modular monoliths
 <img height="77" align="right" src="https://github.com/user-attachments/assets/73e73893-10e9-4d80-b818-f16309eb1e14" />
 
 Um **monolítico modular** é uma arquitetura onde a aplicação é implantada como **um único sistema**, um único processo, um único deploy, mas *internamente é organizada em módulos fortemente isolados*, cada um com responsabilidades claras, contratos bem definidos e regras rígidas de dependência. Ele não é um “monólito bagunçado” melhorado, nem um microsserviço disfarçado; é uma tentativa deliberada de obter os benefícios conceituais dos microsserviços sem pagar, de início, o custo operacional deles.
