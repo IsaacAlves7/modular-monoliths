@@ -90,3 +90,5 @@ npm run db:migrate          # cria as tabelas
 npm run db:seed             # popula dados iniciais
 npm run dev                 # inicia em http://localhost:8080
 ```
+
+![Evaluation](https://github.com/user-attachments/assets/b3448a65-c130-44bd-b623-63e901d37b12)
